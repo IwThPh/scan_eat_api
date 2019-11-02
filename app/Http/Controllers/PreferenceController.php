@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\preference;
+use App\Preference;
 use Illuminate\Http\Request;
 
 class PreferenceController extends Controller

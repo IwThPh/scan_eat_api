@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\allergen;
+use App\Allergen;
 use Illuminate\Http\Request;
 
 class AllergenController extends Controller

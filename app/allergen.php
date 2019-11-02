@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class allergen extends Model
+class Allergen extends Model
 {
     //
 }
