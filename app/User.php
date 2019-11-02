@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the preferences that belong to this user.
+     */
+    public function preference()
+    {
+        return $this->hasOne('App\Preference');
+    }
 }
