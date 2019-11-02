@@ -44,4 +44,24 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Preference');
     }
+
+    /**
+     * The products that the user has scanned.
+     */
+    public function scanned()
+    {
+        return $this->belongsToMany('App\Product', 'product_user',
+                                    'user_id', 'product_id')
+                    ->withPivot('saved')->withTimestamps();
+    }
+
+    /**
+     * The products that the user has saved.
+     */
+    public function saved()
+    {
+        return $this->belongsToMany('App\Product', 'product_user',
+                                    'user_id', 'product_id')
+                    ->wherePivot('saved', true);
+    }
 }
