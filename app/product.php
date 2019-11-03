@@ -38,4 +38,12 @@ class Product extends Model
                                     'product_id', 'allergen_id');
     }
 
+    /**
+     * The diets the product is compatible.
+     */
+    public function diets()
+    {
+        return $this->belongsToMany('App\Diet', 'diet_product',
+                                    'product_id', 'diet_id');
+    }
 }
