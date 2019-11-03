@@ -73,4 +73,14 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Allergen', 'allergen_user',
                                     'user_id', 'allergen_id');
     }
+
+    /**
+     * The diets the user has chosen.
+     */
+    public function diets()
+    {
+        return $this->belongsToMany('App\Diet', 'diet_user',
+                                    'user_id', 'diet_id');
+    }
+
 }
