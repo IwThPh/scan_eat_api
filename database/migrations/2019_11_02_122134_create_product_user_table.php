@@ -20,10 +20,13 @@ class CreateProductUserTable extends Migration
             $table->boolean('saved')->default(false);
             $table->timestamps();
 
-            $table->primary(['id', 'product_id', 'user_id']);
+            $table->primary('id');
+            $table->unique(['product_id', 'user_id']);
+
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
+
             $table->foreign('product_id')
                   ->references('id')->on('products')
                   ->onDelete('cascade');
