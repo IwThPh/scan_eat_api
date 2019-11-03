@@ -6,5 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Allergen extends Model
 {
-    //
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'description'
+    ];
+
+    //TODO: Check if the inverse of a many-to-many relationship needs to be defined.
+    /**
+     * The users that have selected this allergen.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Allergen', 'allergen_user',
+                                    'allergen_id', 'user_id');
+    }
 }

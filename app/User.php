@@ -64,4 +64,13 @@ class User extends Authenticatable
                                     'user_id', 'product_id')
                     ->wherePivot('saved', true);
     }
+
+    /**
+     * The allergies the user has.
+     */
+    public function allergens()
+    {
+        return $this->belongsToMany('App\Allergen', 'allergen_user',
+                                    'user_id', 'allergen_id');
+    }
 }
