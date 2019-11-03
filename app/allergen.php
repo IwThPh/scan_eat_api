@@ -21,7 +21,16 @@ class Allergen extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\Allergen', 'allergen_user',
+        return $this->belongsToMany('App\User', 'allergen_user',
                                     'allergen_id', 'user_id');
+    }
+
+    /**
+     * The products that containt this allergen.
+     */
+    public function products()
+    {
+        return $this->belongsToMany('App\Product', 'allergen_product',
+                                    'allergen_id', 'product_id');
     }
 }

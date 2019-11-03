@@ -28,4 +28,14 @@ class Product extends Model
                                     'product_id', 'user_id')
                     ->withPivot('saved')->withTimestamps();
     }
+
+    /**
+     * The allergens this product contains.
+     */
+    public function allergens()
+    {
+        return $this->belongsToMany('App\Allergen', 'allergen_product',
+                                    'product_id', 'allergen_id');
+    }
+
 }
