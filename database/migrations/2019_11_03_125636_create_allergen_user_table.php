@@ -19,7 +19,6 @@ class CreateAllergenUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique(['allergen_id', 'user_id']);
 
             $table->foreign('user_id')

@@ -19,7 +19,6 @@ class CreateDietUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique(['diet_id', 'user_id']);
 
             $table->foreign('user_id')

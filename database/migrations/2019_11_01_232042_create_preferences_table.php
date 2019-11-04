@@ -29,7 +29,6 @@ class CreatePreferencesTable extends Migration
             $table->float('sodium_max', 6, 2)->nullable();
             $table->timestamps();
 
-            $table->primary(['id', 'user_id']);
             $table->unique('user_id');
 
             $table->foreign('user_id')

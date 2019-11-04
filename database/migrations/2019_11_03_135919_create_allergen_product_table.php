@@ -19,7 +19,6 @@ class CreateAllergenProductTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique(['allergen_id', 'product_id']);
 
             $table->foreign('product_id')

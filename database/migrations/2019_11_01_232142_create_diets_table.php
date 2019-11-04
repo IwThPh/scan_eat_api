@@ -19,7 +19,6 @@ class CreateDietsTable extends Migration
             $table->text('description');
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique('name');
         });
     }
