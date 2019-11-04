@@ -29,7 +29,6 @@ class CreateProductsTable extends Migration
             $table->float('sodium_100g', 6, 2);
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique('barcode');
         });
     }
