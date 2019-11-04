@@ -20,7 +20,6 @@ class CreateProductUserTable extends Migration
             $table->boolean('saved')->default(false);
             $table->timestamps();
 
-            $table->primary('id');
             $table->unique(['product_id', 'user_id']);
 
             $table->foreign('user_id')
