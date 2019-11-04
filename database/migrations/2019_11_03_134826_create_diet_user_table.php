@@ -26,7 +26,7 @@ class CreateDietUserTable extends Migration
                   ->onDelete('cascade');
 
             $table->foreign('diet_id')
-                  ->references('id')->on('diet')
+                  ->references('id')->on('diets')
                   ->onDelete('cascade');
         });
     }

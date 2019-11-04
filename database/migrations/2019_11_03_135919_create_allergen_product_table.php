@@ -26,7 +26,7 @@ class CreateAllergenProductTable extends Migration
                   ->onDelete('cascade');
 
             $table->foreign('allergen_id')
-                  ->references('id')->on('allergen')
+                  ->references('id')->on('allergens')
                   ->onDelete('cascade');
         });
     }
