@@ -56,9 +56,9 @@ class User extends Authenticatable
     }
 
     /**
-     * The products that the user has saved.
+     * The products that the user has favourited.
      */
-    public function saved()
+    public function favourites()
     {
         return $this->belongsToMany('App\Product', 'product_user',
                                     'user_id', 'product_id')
