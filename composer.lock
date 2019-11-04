@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d62f0a9fbfd7c151e70f9a88d0461ab1",
+    "content-hash": "59ec1564b7ee3e6dee473aa1eb3cf0c8",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1510,6 +1510,56 @@
                 "php"
             ],
             "time": "2019-10-25T18:33:07+00:00"
+        },
+        {
+            "name": "openfoodfacts/openfoodfacts-php",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/openfoodfacts/openfoodfacts-php.git",
+                "reference": "d5fc3b16913411f9b07ca740a6769323184ff0e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/openfoodfacts/openfoodfacts-php/zipball/d5fc3b16913411f9b07ca740a6769323184ff0e7",
+                "reference": "d5fc3b16913411f9b07ca740a6769323184ff0e7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3",
+                "php": ">=7.1",
+                "psr/log": "^1.0",
+                "psr/simple-cache": "^1.0"
+            },
+            "require-dev": {
+                "ext-gd": ">=7.2",
+                "monolog/monolog": "^1.23",
+                "phpunit/phpunit": "^7.0",
+                "symfony/cache": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OpenFoodFacts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roberto Moreno",
+                    "email": "rmorenp@rampmaster.org",
+                    "homepage": "http://www.rampmaster.org",
+                    "role": "Wrapper Developer"
+                }
+            ],
+            "description": "Open Food Facts API Wrapper, the open database about food.",
+            "homepage": "https://world.openfoodfacts.org/",
+            "time": "2019-10-04T16:22:21+00:00"
         },
         {
             "name": "opis/closure",
