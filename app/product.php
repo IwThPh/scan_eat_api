@@ -46,4 +46,12 @@ class Product extends Model
         return $this->belongsToMany('App\Diet', 'diet_product',
                                     'product_id', 'diet_id');
     }
+
+    /**
+     * Defines path to find Product.
+     */
+    public function path()
+    {
+        return "/product/".$this->barcode;
+    }
 }
