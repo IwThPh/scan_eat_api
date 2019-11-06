@@ -18,15 +18,36 @@ class Product extends Model
         'saturated_100g', 'sodium_100g'
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'weight_g'=>'float',
+        'energy_100g'=>'float',
+        'carbohydrate_100g'=>'float',
+        'protein_100g'=>'float',
+        'fat_100g'=>'float',
+        'fiber_100g'=>'float',
+        'salt_100g'=>'float',
+        'sugar_100g'=>'float',
+        'saturated_100g'=>'float',
+        'sodium_100g'=>'float'
+    ];
 
     /**
      * The users that have scanned this product
      */
     public function scanned()
     {
-        return $this->belongsToMany('App\Product', 'product_user',
-                                    'product_id', 'user_id')
-                    ->withPivot('saved')->withTimestamps();
+        return $this->belongsToMany(
+            'App\Product',
+            'product_user',
+            'product_id',
+            'user_id'
+        )
+            ->withPivot('saved')->withTimestamps();
     }
 
     /**
@@ -34,8 +55,12 @@ class Product extends Model
      */
     public function allergens()
     {
-        return $this->belongsToMany('App\Allergen', 'allergen_product',
-                                    'product_id', 'allergen_id');
+        return $this->belongsToMany(
+            'App\Allergen',
+            'allergen_product',
+            'product_id',
+            'allergen_id'
+        );
     }
 
     /**
@@ -43,8 +68,12 @@ class Product extends Model
      */
     public function diets()
     {
-        return $this->belongsToMany('App\Diet', 'diet_product',
-                                    'product_id', 'diet_id');
+        return $this->belongsToMany(
+            'App\Diet',
+            'diet_product',
+            'product_id',
+            'diet_id'
+        );
     }
 
     /**
@@ -52,6 +81,6 @@ class Product extends Model
      */
     public function path()
     {
-        return "/product/".$this->barcode;
+        return "/product/" . $this->barcode;
     }
 }
