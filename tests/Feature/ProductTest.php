@@ -7,7 +7,6 @@ use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Resources\Product as ProductResource;
 
 class ProductTest extends TestCase
 {
@@ -32,7 +31,7 @@ class ProductTest extends TestCase
             'fat_100g' => $product->fat_100g,'fiber_100g' => $product->fiber_100g,
             'salt_100g' => $product->salt_100g,'sugar_100g' => $product->sugar_100g,
             'saturated_100g' => $product->saturated_100g,'sodium_100g' => $product->sodium_100g,
-            'created_at' => $product->created_at->toDateTimeString(),'updated_at' => $product->updated_at->toDateTimeString(),
+            'created_at' => $product->created_at,'updated_at' => $product->updated_at,
         ];
 
         $response = $this->get('api'.$product->path());
@@ -68,5 +67,25 @@ class ProductTest extends TestCase
         $response = $this->get('api'.'/product/737628064502');
         $response->assertStatus(200)
                  ->assertJsonStructure($json);
+    }
+
+    /**
+     * @test
+     * A product retrieved from external API is added to local database.
+     *
+     * @return void
+     */
+    public function a_product_retrieved_externally_is_added()
+    {
+        $this->withoutExceptionHandling();
+        $this->refreshDatabase();
+
+        $barcode = '0737628064502';
+        $response = $this->get('api'.'/product/'.$barcode);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('products', [
+            'barcode' => $barcode,
+        ]);
     }
 }

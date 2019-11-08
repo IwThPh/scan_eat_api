@@ -57,12 +57,11 @@ class ProductController extends Controller
     {
         $product = Product::where('barcode', $barcode)->first();
         if(!$product){
-            $product = $this->OpenFoodFactsProduct->getProduct($barcode);
-
+            $response = $this->OpenFoodFactsProduct->getProduct($barcode);
+            $product = new Product($response);
+            $product->save();
         }
-        return response()->json($product,200);
-
-        // return response()->json(new ProductResource($product),200);
+        return response()->json(new ProductResource($product),200);
     }
 
     /**
