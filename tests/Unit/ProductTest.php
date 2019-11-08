@@ -21,7 +21,7 @@ class ProductTest extends TestCase
     public function a_product_has_a_path()
     {
         $product = factory(Product::class)->create();
-        $this->assertEquals($product->path(), "product/".$product->barcode);
+        $this->assertEquals("/product/".$product->barcode, $product->path());
     }
 
     /**

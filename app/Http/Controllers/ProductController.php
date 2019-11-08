@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Util\OpenFoodFactsProduct;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
 {
+    protected $OpenFoodFactsProduct;
+
+    public function __construct(OpenFoodFactsProduct $offProduct)
+    {
+        $this->OpenFoodFactsProduct = $offProduct;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +56,13 @@ class ProductController extends Controller
     public function show($barcode)
     {
         $product = Product::where('barcode', $barcode)->first();
-        return response()->json(new ProductResource($product),200);
+        if(!$product){
+            $product = $this->OpenFoodFactsProduct->getProduct($barcode);
+
+        }
+        return response()->json($product,200);
+
+        // return response()->json(new ProductResource($product),200);
     }
 
     /**

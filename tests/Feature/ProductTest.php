@@ -32,11 +32,41 @@ class ProductTest extends TestCase
             'fat_100g' => $product->fat_100g,'fiber_100g' => $product->fiber_100g,
             'salt_100g' => $product->salt_100g,'sugar_100g' => $product->sugar_100g,
             'saturated_100g' => $product->saturated_100g,'sodium_100g' => $product->sodium_100g,
-            'created_at' => $product->created_at,'updated_at' => $product->updated_at,
+            'created_at' => $product->created_at->toDateTimeString(),'updated_at' => $product->updated_at->toDateTimeString(),
         ];
 
         $response = $this->get('api'.$product->path());
         $response->assertStatus(200)
                  ->assertExactJson($json);
+    }
+
+    /**
+     * @test
+     * A product can be retrieved from external API.
+     *
+     * @return void
+     */
+    public function a_product_can_be_retrieved_externally()
+    {
+        $this->withoutExceptionHandling();
+
+        $json = [
+            'barcode',
+            'name',
+            'weight_g',
+            'energy_100g',
+            'carbohydrate_100g',
+            'protein_100g',
+            'fat_100g',
+            'fiber_100g',
+            'salt_100g',
+            'sugar_100g',
+            'saturated_100g',
+            'sodium_100g',
+        ];
+
+        $response = $this->get('api'.'/product/737628064502');
+        $response->assertStatus(200)
+                 ->assertJsonStructure($json);
     }
 }
