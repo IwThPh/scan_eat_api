@@ -46,6 +46,13 @@ class OpenFoodFactsProduct
             'saturated_100g' => Arr::get($raw, 'product.nutriments.saturated-fat_100g', 0),
             'sodium_100g' => Arr::get($raw, 'product.nutriments.sodium_100g', 0),
         ];
+        $unit = Arr::get($raw, 'product.nutriments.energy_unit', 'kcal');
+        $kcalToKJ = 4.184;
+
+
+        if ($unit == 'kJ') {
+            $product['energy_100g'] = $product['energy_100g'] / $kcalToKJ;
+        }
 
         return $product;
     }
@@ -73,7 +80,7 @@ class OpenFoodFactsProduct
     public function responseHandler($response)
     {
         if ($response) {
-            return json_decode($response,true);
+            return json_decode($response, true);
         }
         return [];
     }
