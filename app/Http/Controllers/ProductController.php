@@ -58,6 +58,7 @@ class ProductController extends Controller
         $product = Product::where('barcode', $barcode)->first();
         if(!$product){
             $response = $this->OpenFoodFactsProduct->getProduct($barcode);
+            //TODO Need to check response before we add to database.
             $product = new Product($response);
             $product->save();
         }
