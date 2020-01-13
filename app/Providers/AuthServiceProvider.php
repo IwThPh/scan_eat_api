@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
 
+        URL::forceScheme('https');
         Passport::routes();
         //
     }
