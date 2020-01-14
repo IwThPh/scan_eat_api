@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,11 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-
-Route::middleware('auth:api')->group(function ()
-{
+Route::middleware('auth:api')->group(function () {
+    Route::post('auth/revoke', 'AuthController@revoke');
+    Route::post('auth/refresh', 'AuthController@refresh');
 });
 
 Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
+Route::post('auth/token', 'AuthController@token');
+Route::post('auth/register', 'AuthController@register');
