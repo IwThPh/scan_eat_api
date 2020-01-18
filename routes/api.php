@@ -14,8 +14,8 @@
 Route::middleware('auth:api')->group(function () {
     Route::post('auth/revoke', 'AuthController@revoke');
     Route::post('auth/refresh', 'AuthController@refresh');
+    Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
 });
 
-Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
 Route::post('auth/token', 'AuthController@token');
 Route::post('auth/register', 'AuthController@register');

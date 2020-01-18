@@ -5,12 +5,22 @@ namespace Tests\Feature;
 use App\User;
 use App\Product;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('passport:install');
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+    }
 
     /**
      * @test
@@ -25,18 +35,18 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
 
         $json = [
-            'id' => $product->id, 'barcode' => $product->barcode,'name' => $product->name,
-            'weight_g' => $product->weight_g,'energy_100g' => $product->energy_100g,
-            'carbohydrate_100g' => $product->carbohydrate_100g,'protein_100g' => $product->protein_100g,
-            'fat_100g' => $product->fat_100g,'fiber_100g' => $product->fiber_100g,
-            'salt_100g' => $product->salt_100g,'sugar_100g' => $product->sugar_100g,
-            'saturated_100g' => $product->saturated_100g,'sodium_100g' => $product->sodium_100g,
-            'created_at' => $product->created_at,'updated_at' => $product->updated_at,
+            'id' => $product->id, 'barcode' => $product->barcode, 'name' => $product->name,
+            'weight_g' => $product->weight_g, 'energy_100g' => $product->energy_100g,
+            'carbohydrate_100g' => $product->carbohydrate_100g, 'protein_100g' => $product->protein_100g,
+            'fat_100g' => $product->fat_100g, 'fiber_100g' => $product->fiber_100g,
+            'salt_100g' => $product->salt_100g, 'sugar_100g' => $product->sugar_100g,
+            'saturated_100g' => $product->saturated_100g, 'sodium_100g' => $product->sodium_100g,
+            'created_at' => $product->created_at, 'updated_at' => $product->updated_at,
         ];
 
-        $response = $this->get('api'.$product->path());
+        $response = $this->get('api' . $product->path());
         $response->assertStatus(200)
-                 ->assertExactJson($json);
+            ->assertExactJson($json);
     }
 
     /**
@@ -64,9 +74,9 @@ class ProductTest extends TestCase
             'sodium_100g',
         ];
 
-        $response = $this->get('api'.'/product/737628064502');
+        $response = $this->get('api' . '/product/737628064502');
         $response->assertStatus(200)
-                 ->assertJsonStructure($json);
+            ->assertJsonStructure($json);
     }
 
     /**
@@ -81,7 +91,7 @@ class ProductTest extends TestCase
         $this->refreshDatabase();
 
         $barcode = '0737628064502';
-        $response = $this->get('api'.'/product/'.$barcode);
+        $response = $this->get('api' . '/product/' . $barcode);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('products', [
