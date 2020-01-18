@@ -17,5 +17,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
 });
 
-Route::post('auth/token', 'AuthController@token');
-Route::post('auth/register', 'AuthController@register');
+Route::middleware('throttle:10,5')->group(function () {
+    Route::post('auth/token', 'AuthController@token');
+    Route::post('auth/register', 'AuthController@register');
+});
+
