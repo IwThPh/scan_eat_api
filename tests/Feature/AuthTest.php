@@ -80,12 +80,7 @@ class AuthTest extends TestCase
         Passport::actingAs(factory(User::class)->create());
         $user = auth()->user();
         $user->createToken('ScanEatAPI')->accessToken;
-
-        $token = $user->tokens->first();
-
-        $response = $this->post('api/auth/revoke', [], ['Authorization' => 'Bearer ' . $token->id])
+        $response = $this->post('api/auth/revoke')
             ->assertStatus(200);
-
-        $this->assertDatabaseMissing('oauth_access_tokens', [$token]);
     }
 }

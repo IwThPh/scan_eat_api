@@ -76,14 +76,13 @@ class AuthController extends AccessTokenController
      */
     public function revoke(Request $request)
     {
-        $token = $request->bearerToken();
-        $token = Token::findOrFail($token);
+        $tokens = auth()->user()->tokens;
 
-        if ($token->revoke()) {
-            return response()->json('Token Revoked', 200);
+        foreach ($tokens as $token) {
+            $token->revoke();
         }
 
-        return response()->json('Couldn\'t Revoke Token', 500);
+        return response()->json(['message' => 'All Tokens Revoked'], 200);
     }
 
     /**
