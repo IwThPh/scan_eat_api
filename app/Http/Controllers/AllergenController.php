@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Allergen;
 use Illuminate\Http\Request;
+use App\Http\Resources\Allergens as AllergenCollection;
 
 class AllergenController extends Controller
 {
@@ -14,7 +15,8 @@ class AllergenController extends Controller
      */
     public function index()
     {
-        //
+        return (new AllergenCollection(Allergen::get()))
+                ->response();
     }
 
     /**

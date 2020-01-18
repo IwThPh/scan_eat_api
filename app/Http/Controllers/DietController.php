@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Diet;
 use Illuminate\Http\Request;
+use App\Http\Resources\Diets as DietCollection;
 
 class DietController extends Controller
 {
@@ -14,7 +15,8 @@ class DietController extends Controller
      */
     public function index()
     {
-        //
+        return (new DietCollection(Diet::get()))
+                ->response();
     }
 
     /**

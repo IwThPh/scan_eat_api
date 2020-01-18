@@ -22,3 +22,5 @@ Route::middleware('throttle:10,5')->group(function () {
     Route::post('auth/register', 'AuthController@register');
 });
 
+Route::get('allergens', 'AllergenController@index');
+Route::get('diets', 'DietController@index');
