@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Allergen;
-use Illuminate\Http\Request;
 use App\Http\Resources\Allergens as AllergenCollection;
+use Illuminate\Http\Request;
 
 class AllergenController extends Controller
 {
@@ -16,17 +16,29 @@ class AllergenController extends Controller
     public function index()
     {
         return (new AllergenCollection(Allergen::get()))
-                ->response();
+            ->response();
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Selects given allergens for a user.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function select(Request $request)
     {
-        //
+        $user = auth()->user();
+        $user->allergens()->sync([]);
+
+        $allergenIds = $request->input();
+
+        foreach ($allergenIds as $aid) {
+            if (Allergen::find($aid) != null) {
+                $user->allergens()->attach($aid);
+            }
+        }
+
+        return response()->json(['message' => 'Selected Allergens!'], 200);
     }
 
     /**

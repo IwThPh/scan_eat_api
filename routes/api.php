@@ -15,6 +15,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('auth/revoke', 'AuthController@revoke');
     Route::post('auth/refresh', 'AuthController@refresh');
     Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
+
+    Route::post('allergens', 'AllergenController@select');
+    Route::post('diets', 'DietController@select');
 });
 
 Route::middleware('throttle:10,5')->group(function () {

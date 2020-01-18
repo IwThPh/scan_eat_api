@@ -20,13 +20,25 @@ class DietController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Selects given diets for a user.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function select(Request $request)
     {
-        //
+        $user = auth()->user();
+        $user->diets()->sync([]);
+
+        $dietIds = $request->input();
+
+        foreach ($dietIds as $did) {
+            if (Diet::find($did) != null) {
+                $user->diets()->attach($did);
+            }
+        }
+
+        return response()->json(['message' => 'Diets selected!'], 200);
     }
 
     /**
