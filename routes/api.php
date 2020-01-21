@@ -18,6 +18,10 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('allergens', 'AllergenController@select');
     Route::post('diets', 'DietController@select');
+
+    Route::get('preferences', 'PreferenceController@show');
+    Route::patch('preferences', 'PreferenceController@update');
+    Route::delete('preferences', 'PreferenceController@destroy');
 });
 
 Route::middleware('throttle:10,5')->group(function () {

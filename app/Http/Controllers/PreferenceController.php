@@ -2,74 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Preference as PreferenceResource;
 use App\Preference;
 use Illuminate\Http\Request;
 
 class PreferenceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Returns preference for the given user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function show(Request $request)
+    { $user = auth()->user();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\preference  $preference
-     * @return \Illuminate\Http\Response
-     */
-    public function show(preference $preference)
-    {
-        //
-    }
+        if ($user->preference === null) {
+            $pref = factory(Preference::class)->make();
+            $user->preference()->save($pref);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\preference  $preference
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(preference $preference)
-    {
-        //
+        return (new PreferenceResource($user->preference()->first()))
+            ->response();
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\preference  $preference
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, preference $preference)
+    public function update(Request $request)
     {
-        //
+        $user = auth()->user();
+        $pref = $user->preference()->first();
+
+        $validated = $request->validate([
+            'energy_max' => 'numeric',
+            'carbohydrate_max' => 'numeric',
+            'protein_max' => 'numeric',
+            'fat_max' => 'numeric',
+            'fiber_max' => 'numeric',
+            'salt_max' => 'numeric',
+            'sugar_max' => 'numeric',
+            'saturated_max' => 'numeric',
+            'sodium_max' => 'numeric',
+        ]);
+
+        $pref->update($validated);
+
+        return (new PreferenceResource($user->preference()->first()))
+            ->response();
     }
 
     /**
@@ -80,6 +63,13 @@ class PreferenceController extends Controller
      */
     public function destroy(preference $preference)
     {
-        //
+        $user = auth()->user();
+
+        $user->preference()->delete();
+        $pref = factory(Preference::class)->make();
+        $user->preference()->save($pref);
+
+        return (new PreferenceResource($user->preference()->first()))
+            ->response();
     }
 }
