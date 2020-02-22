@@ -46,7 +46,7 @@ class AuthController extends AccessTokenController
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->all(), 400);
+            return response()->json($validator->errors(), 400);
         }
 
         $data = request()->only('email', 'name', 'password');
