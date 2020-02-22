@@ -15,7 +15,7 @@ class AllergenController extends Controller
      */
     public function index()
     {
-        return (new AllergenCollection(Allergen::get()))
+        return (new AllergenCollection(Allergen::all()))
             ->response();
     }
 

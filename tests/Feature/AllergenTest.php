@@ -27,8 +27,12 @@ class AllergenTest extends TestCase
      */
     public function allergens_can_be_retrieved()
     {
+        $this->withoutExceptionHandling();
+        $user = factory(\App\User::class)->create();
+        Passport::actingAs($user);
         $allergens = factory(\App\Allergen::class, 10)->create();
-        $response = $this->get('/api/allergens');
+
+        $response = $this->post('/api/allergens');
         $response->assertStatus(200);
     }
 
@@ -45,7 +49,7 @@ class AllergenTest extends TestCase
         Passport::actingAs($user);
         $allergens = factory(\App\Allergen::class, 10)->create();
 
-        $response = $this->post('/api/allergens', [1,2,3]);
+        $response = $this->patch('/api/allergens', [1,2,3]);
         $response->assertStatus(200);
         $this->assertTrue($user->allergens->contains(1));
         $this->assertFalse($user->allergens->contains(4));

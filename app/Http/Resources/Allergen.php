@@ -14,10 +14,12 @@ class Allergen extends JsonResource
      */
     public function toArray($request)
     {
+        $user = auth()->user();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'selected' => $user->allergens->contains($this->id),
         ];
     }
 }

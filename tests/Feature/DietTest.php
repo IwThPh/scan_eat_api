@@ -26,8 +26,12 @@ class DietTest extends TestCase
      */
     public function diets_can_be_retrieved()
     {
-        $diets = factory(\App\Diet::class, 5)->create();
-        $response = $this->get('/api/diets');
+        $this->withoutExceptionHandling();
+        $user = factory(\App\User::class)->create();
+        Passport::actingAs($user);
+        $diets = factory(\App\Diet::class, 10)->create();
+
+        $response = $this->post('/api/diets');
         $response->assertStatus(200);
     }
 
@@ -42,9 +46,9 @@ class DietTest extends TestCase
         $this->withoutExceptionHandling();
         $user = factory(\App\User::class)->create();
         Passport::actingAs($user);
-        $allergens = factory(\App\Diet::class, 10)->create();
+        $diets = factory(\App\Diet::class, 10)->create();
 
-        $response = $this->post('/api/diets', [1,2,3]);
+        $response = $this->patch('/api/diets', [1,2,3]);
         $response->assertStatus(200);
         $this->assertTrue($user->diets->contains(1));
         $this->assertFalse($user->diets->contains(4));
