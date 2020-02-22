@@ -37,6 +37,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user = auth()->user();
         return response()->json(new UserResource($user),200);
     }
 
