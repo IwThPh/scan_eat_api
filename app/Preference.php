@@ -12,9 +12,31 @@ class Preference extends Model
      * @var array
      */
     protected $fillable = [
-        'energy_max', 'carbohydrate_max', 'protein_max',
-        'fat_max', 'fiber_max', 'salt_max', 'sugar_max',
-        'saturated_max', 'sodium_max'
+        'energy_max',
+        'carbohydrate_max',
+        'carbohydrate_1',
+        'carbohydrate_2',
+        'protein_max',
+        'protein_1',
+        'protein_2',
+        'fat_max',
+        'fat_1',
+        'fat_2',
+        'fiber_max',
+        'fiber_1',
+        'fiber_2',
+        'salt_max',
+        'salt_1',
+        'salt_2',
+        'sugar_max',
+        'sugar_1',
+        'sugar_2',
+        'saturated_max',
+        'saturated_1',
+        'saturated_2',
+        'sodium_max',
+        'sodium_1',
+        'sodium_2',
     ];
 
     /**

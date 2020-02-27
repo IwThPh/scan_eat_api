@@ -27,6 +27,22 @@ class PreferenceTest extends TestCase
         'sugar_max',
         'saturated_max',
         'sodium_max',
+        'carbohydrate_1',
+        'carbohydrate_2',
+        'protein_1',
+        'protein_2',
+        'fat_1',
+        'fat_2',
+        'fiber_1',
+        'fiber_2',
+        'salt_1',
+        'salt_2',
+        'sugar_1',
+        'sugar_2',
+        'saturated_1',
+        'saturated_2',
+        'sodium_1',
+        'sodium_2',
     ];
 
     public function setUp(): void
@@ -110,8 +126,8 @@ class PreferenceTest extends TestCase
         $response = $this->patch('/api/preferences', $changes);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure($this->jsonStruct)
-                 ->assertJson($changes);
+            ->assertJsonStructure($this->jsonStruct)
+            ->assertJson($changes);
     }
 
     /**

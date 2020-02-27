@@ -25,6 +25,22 @@ class Preference extends JsonResource
             'sugar_max' => $this->sugar_max,
             'saturated_max' => $this->saturated_max,
             'sodium_max' => $this->sodium_max,
+            'carbohydrate_1' => $this->carbohydrate_1,
+            'carbohydrate_2' => $this->carbohydrate_2,
+            'protein_1' => $this->protein_1,
+            'protein_2' => $this->protein_2,
+            'fat_1' => $this->fat_1,
+            'fat_2' => $this->fat_2,
+            'fiber_1' => $this->fibre_1,
+            'fiber_2' => $this->fibre_2,
+            'salt_1' => $this->salt_1,
+            'salt_2' => $this->salt_2,
+            'sugar_1' => $this->sugar_1,
+            'sugar_2' => $this->sugar_2,
+            'saturated_1' => $this->saturated_1,
+            'saturated_2' => $this->saturated_2,
+            'sodium_1' => $this->sodium_1,
+            'sodium_2' => $this->sodium_2,
         ];
     }
 }

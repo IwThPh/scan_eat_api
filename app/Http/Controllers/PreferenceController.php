@@ -47,6 +47,22 @@ class PreferenceController extends Controller
             'sugar_max' => 'numeric',
             'saturated_max' => 'numeric',
             'sodium_max' => 'numeric',
+            'carbohydrate_1' => 'numeric|between:0,1',
+            'carbohydrate_2' => 'numeric|between:0,1|gt:carbohydrate_1',
+            'protein_1' => 'numeric|between:0,1',
+            'protein_2' => 'numeric|between:0,1|gt:protein_1',
+            'fat_1' => 'numeric|between:0,1',
+            'fat_2' => 'numeric|between:0,1|gt:fat_1',
+            'fiber_1' => 'numeric|between:0,1',
+            'fiber_2' => 'numeric|between:0,1|gt:fiber_1',
+            'salt_1' => 'numeric|between:0,1',
+            'salt_2' => 'numeric|between:0,1|gt:salt_1',
+            'sugar_1' => 'numeric|between:0,1',
+            'sugar_2' => 'numeric|between:0,1|gt:sugar_1',
+            'saturated_1' => 'numeric|between:0,1',
+            'saturated_2' => 'numeric|between:0,1|gt:saturated_1',
+            'sodium_1' => 'numeric|between:0,1',
+            'sodium_2' => 'numeric|between:0,1|gt:sodium_1',
         ]);
 
         $pref->update($validated);
