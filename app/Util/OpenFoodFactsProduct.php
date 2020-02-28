@@ -35,7 +35,8 @@ class OpenFoodFactsProduct
         $product = [
             'barcode' => Arr::get($raw, 'code', 0),
             'name' => Arr::get($raw, 'product.product_name', 'Name Not Found'),
-            'weight_g' => Arr::get($raw, 'product.product_quantity', 0),
+            'weight_g' => Arr::get($raw, 'product.product_quantity', 100),
+            'serving_g' => Arr::get($raw, 'product.serving_quantity', 100),
             'energy_100g' => Arr::get($raw, 'product.nutriments.energy_100g', 0),
             'carbohydrate_100g' => Arr::get($raw, 'product.nutriments.carbohydrates_100g', 0),
             'protein_100g' => Arr::get($raw, 'product.nutriments.proteins_100g', 0),

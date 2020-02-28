@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Product;
-use Tests\TestCase;
-use Laravel\Passport\Passport;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
@@ -36,7 +36,7 @@ class ProductTest extends TestCase
 
         $json = [
             'id' => $product->id, 'barcode' => $product->barcode, 'name' => $product->name,
-            'weight_g' => $product->weight_g, 'energy_100g' => $product->energy_100g,
+            'weight_g' => $product->weight_g, 'serving_g' => $product->serving_g, 'energy_100g' => $product->energy_100g,
             'carbohydrate_100g' => $product->carbohydrate_100g, 'protein_100g' => $product->protein_100g,
             'fat_100g' => $product->fat_100g, 'fiber_100g' => $product->fiber_100g,
             'salt_100g' => $product->salt_100g, 'sugar_100g' => $product->sugar_100g,
@@ -63,6 +63,7 @@ class ProductTest extends TestCase
             'barcode',
             'name',
             'weight_g',
+            'serving_g',
             'energy_100g',
             'carbohydrate_100g',
             'protein_100g',

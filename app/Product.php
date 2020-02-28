@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'barcode', 'name', 'weight_g',
+        'barcode', 'name', 'weight_g', 'serving_g',
         'energy_100g', 'carbohydrate_100g', 'protein_100g',
         'fat_100g', 'fiber_100g', 'salt_100g', 'sugar_100g',
         'saturated_100g', 'sodium_100g'
@@ -25,6 +25,7 @@ class Product extends Model
      */
     protected $casts = [
         'weight_g'=>'float',
+        'serving_g'=>'float',
         'energy_100g'=>'float',
         'carbohydrate_100g'=>'float',
         'protein_100g'=>'float',

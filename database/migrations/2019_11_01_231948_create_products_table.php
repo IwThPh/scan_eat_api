@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('barcode');
             $table->string('name');
             $table->float('weight_g', 6, 2);
+            $table->float('serving_g', 6, 2);
             $table->float('energy_100g', 6, 2);
             $table->float('carbohydrate_100g', 6, 2);
             $table->float('protein_100g', 6, 2);

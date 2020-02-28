@@ -19,6 +19,7 @@ class Product extends JsonResource
             'barcode' => $this->barcode,
             'name' => $this->name,
             'weight_g' => $this->weight_g,
+            'serving_g' => $this->serving_g,
             'energy_100g' => $this->energy_100g,
             'carbohydrate_100g' => $this->carbohydrate_100g,
             'protein_100g' => $this->protein_100g,
