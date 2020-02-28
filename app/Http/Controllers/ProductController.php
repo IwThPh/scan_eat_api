@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use Illuminate\Http\Request;
-use App\Util\OpenFoodFactsProduct;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Product as ProductResource;
+use App\Product;
+use App\Util\OpenFoodFactsProduct;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
@@ -56,13 +56,17 @@ class ProductController extends Controller
     public function show($barcode)
     {
         $product = Product::where('barcode', $barcode)->first();
-        if(!$product){
+        if (!$product) {
             $response = $this->OpenFoodFactsProduct->getProduct($barcode);
-            //TODO Need to check response before we add to database.
             $product = new Product($response);
-            $product->save();
+            if ($product->weight_g == 0) {
+                $product->weight_g = 100;
+            }
+            if ($product->name != 'Name Not Found') {
+                $product->save();
+            }
         }
-        return response()->json(new ProductResource($product),200);
+        return response()->json(new ProductResource($product), 200);
     }
 
     /**
