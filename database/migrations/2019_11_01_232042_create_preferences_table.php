@@ -22,7 +22,7 @@ class CreatePreferencesTable extends Migration
             $table->float('carbohydrate_max', 6, 2)->nullable();
             $table->float('protein_max', 6, 2)->nullable();
             $table->float('fat_max', 6, 2)->nullable();
-            $table->float('fiber_max', 6, 2)->nullable();
+            $table->float('fibre_max', 6, 2)->nullable();
             $table->float('salt_max', 6, 2)->nullable();
             $table->float('sugar_max', 6, 2)->nullable();
             $table->float('saturated_max', 6, 2)->nullable();
@@ -33,8 +33,8 @@ class CreatePreferencesTable extends Migration
             $table->double('protein_2', 2, 2)->default('0.7');
             $table->double('fat_1', 2, 2)->default('0.5');
             $table->double('fat_2', 2, 2)->default('0.7');
-            $table->double('fiber_1', 2, 2)->default('0.5');
-            $table->double('fiber_2', 2, 2)->default('0.7');
+            $table->double('fibre_1', 2, 2)->default('0.5');
+            $table->double('fibre_2', 2, 2)->default('0.7');
             $table->double('salt_1', 2, 2)->default('0.5');
             $table->double('salt_2', 2, 2)->default('0.7');
             $table->double('sugar_1', 2, 2)->default('0.5');
