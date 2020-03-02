@@ -15,7 +15,7 @@ class PreferenceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
-    { $user = auth()->user();
+    {$user = auth()->user();
 
         if ($user->preference === null) {
             $pref = factory(Preference::class)->make();
@@ -37,35 +37,56 @@ class PreferenceController extends Controller
         $user = auth()->user();
         $pref = $user->preference()->first();
 
-        $validated = $request->validate([
-            'energy_max' => 'numeric',
-            'carbohydrate_max' => 'numeric',
-            'protein_max' => 'numeric',
-            'fat_max' => 'numeric',
-            'fibre_max' => 'numeric',
-            'salt_max' => 'numeric',
-            'sugar_max' => 'numeric',
-            'saturated_max' => 'numeric',
-            'sodium_max' => 'numeric',
-            'carbohydrate_1' => 'numeric|between:0,1',
-            'carbohydrate_2' => 'numeric|between:0,1|gt:carbohydrate_1',
-            'protein_1' => 'numeric|between:0,1',
-            'protein_2' => 'numeric|between:0,1|gt:protein_1',
-            'fat_1' => 'numeric|between:0,1',
-            'fat_2' => 'numeric|between:0,1|gt:fat_1',
-            'fibre_1' => 'numeric|between:0,1',
-            'fibre_2' => 'numeric|between:0,1|gt:fibre_1',
-            'salt_1' => 'numeric|between:0,1',
-            'salt_2' => 'numeric|between:0,1|gt:salt_1',
-            'sugar_1' => 'numeric|between:0,1',
-            'sugar_2' => 'numeric|between:0,1|gt:sugar_1',
-            'saturated_1' => 'numeric|between:0,1',
-            'saturated_2' => 'numeric|between:0,1|gt:saturated_1',
-            'sodium_1' => 'numeric|between:0,1',
-            'sodium_2' => 'numeric|between:0,1|gt:sodium_1',
-        ]);
+        $validator = validator(request()->only(
+            'energy_max', 'carbohydrate_max',
+            'protein_max', 'fat_max', 'fibre_max', 'salt_max',
+            'sugar_max', 'saturated_max', 'sodium_max', 'carbohydrate_1',
+            'carbohydrate_2', 'protein_1', 'protein_2',
+            'fat_1', 'fat_2', 'fibre_1', 'fibre_2', 'salt_1', 'salt_2',
+            'sugar_1', 'sugar_2', 'saturated_1',
+            'saturated_2', 'sodium_1', 'sodium_2', ),
+            [
+                'energy_max' => 'required|numeric',
+                'carbohydrate_max' => 'required|numeric',
+                'protein_max' => 'required|numeric',
+                'fat_max' => 'required|numeric',
+                'fibre_max' => 'required|numeric',
+                'salt_max' => 'required|numeric',
+                'sugar_max' => 'required|numeric',
+                'saturated_max' => 'required|numeric',
+                'sodium_max' => 'required|numeric',
+                'carbohydrate_1' => 'required|numeric|between:0,1',
+                'carbohydrate_2' => 'required|numeric|between:0,1|gt:carbohydrate_1',
+                'protein_1' => 'required|numeric|between:0,1',
+                'protein_2' => 'required|numeric|between:0,1|gt:protein_1',
+                'fat_1' => 'required|numeric|between:0,1',
+                'fat_2' => 'required|numeric|between:0,1|gt:fat_1',
+                'fibre_1' => 'required|numeric|between:0,1',
+                'fibre_2' => 'required|numeric|between:0,1|gt:fibre_1',
+                'salt_1' => 'required|numeric|between:0,1',
+                'salt_2' => 'required|numeric|between:0,1|gt:salt_1',
+                'sugar_1' => 'required|numeric|between:0,1',
+                'sugar_2' => 'required|numeric|between:0,1|gt:sugar_1',
+                'saturated_1' => 'required|numeric|between:0,1',
+                'saturated_2' => 'required|numeric|between:0,1|gt:saturated_1',
+                'sodium_1' => 'required|numeric|between:0,1',
+                'sodium_2' => 'required|numeric|between:0,1|gt:sodium_1',
+            ]);
 
-        $pref->update($validated);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $data = $request->only(
+            'energy_max', 'carbohydrate_max',
+            'protein_max', 'fat_max', 'fibre_max', 'salt_max',
+            'sugar_max', 'saturated_max', 'sodium_max', 'carbohydrate_1',
+            'carbohydrate_2', 'protein_1', 'protein_2',
+            'fat_1', 'fat_2', 'fibre_1', 'fibre_2', 'salt_1', 'salt_2',
+            'sugar_1', 'sugar_2', 'saturated_1',
+            'saturated_2', 'sodium_1', 'sodium_2', );
+
+        $pref->update($data);
 
         return (new PreferenceResource($user->preference()->first()))
             ->response();
