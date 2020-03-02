@@ -27,6 +27,8 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('preferences', 'PreferenceController@destroy');
 
     Route::post('user', 'UserController@show');
+    Route::post('user/history', 'UserController@history');
+    Route::post('user/saved', 'UserController@saved');
 });
 
 // Route::middleware('throttle:10,5')->group(function () {

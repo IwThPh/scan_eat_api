@@ -55,6 +55,7 @@ class ProductController extends Controller
      */
     public function show($barcode)
     {
+        $user = auth()->user();
         $product = Product::where('barcode', $barcode)->first();
         if (!$product) {
             $response = $this->OpenFoodFactsProduct->getProduct($barcode);
@@ -64,6 +65,7 @@ class ProductController extends Controller
             }
             if ($product->name != 'Name Not Found') {
                 $product->save();
+                $user->scanned()->attach($product);
             }
         }
         return response()->json(new ProductResource($product), 200);
