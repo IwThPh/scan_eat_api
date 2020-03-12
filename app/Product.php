@@ -15,7 +15,16 @@ class Product extends Model
         'barcode', 'name', 'weight_g', 'serving_g',
         'energy_100g', 'carbohydrate_100g', 'protein_100g',
         'fat_100g', 'fiber_100g', 'salt_100g', 'sugar_100g',
-        'saturated_100g', 'sodium_100g'
+        'saturated_100g', 'sodium_100g',
+    ];
+
+    /**
+     * The attributes that are appended.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'allergens_id', 'diets_id',
     ];
 
     /**
@@ -24,17 +33,17 @@ class Product extends Model
      * @var array
      */
     protected $casts = [
-        'weight_g'=>'float',
-        'serving_g'=>'float',
-        'energy_100g'=>'float',
-        'carbohydrate_100g'=>'float',
-        'protein_100g'=>'float',
-        'fat_100g'=>'float',
-        'fiber_100g'=>'float',
-        'salt_100g'=>'float',
-        'sugar_100g'=>'float',
-        'saturated_100g'=>'float',
-        'sodium_100g'=>'float'
+        'weight_g' => 'float',
+        'serving_g' => 'float',
+        'energy_100g' => 'float',
+        'carbohydrate_100g' => 'float',
+        'protein_100g' => 'float',
+        'fat_100g' => 'float',
+        'fiber_100g' => 'float',
+        'salt_100g' => 'float',
+        'sugar_100g' => 'float',
+        'saturated_100g' => 'float',
+        'sodium_100g' => 'float',
     ];
 
     /**
@@ -83,5 +92,15 @@ class Product extends Model
     public function path()
     {
         return "/product/" . $this->barcode;
+    }
+
+    public function getAllergensIdAttribute()
+    {
+        return $this->allergens->pluck('id');
+    }
+
+    public function getDietsIdAttribute()
+    {
+        return $this->diets->pluck('id');
     }
 }
