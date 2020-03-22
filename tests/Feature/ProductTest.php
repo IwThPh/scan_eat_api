@@ -99,4 +99,24 @@ class ProductTest extends TestCase
             'barcode' => $barcode,
         ]);
     }
+
+    /**
+     * @test
+     * A 203 response error expected when external API does not have information.
+     *
+     * @return void
+     */
+    public function a_product_retrieved_externally_does_not_exist()
+    {
+        $this->withoutExceptionHandling();
+        $this->refreshDatabase();
+
+        $barcode = '0700000000000';
+        $response = $this->get('api' . '/product/' . $barcode);
+
+        $response->assertStatus(203);
+        $this->assertDatabaseMissing('products', [
+            'barcode' => $barcode,
+        ]);
+    }
 }

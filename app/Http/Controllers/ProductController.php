@@ -63,10 +63,11 @@ class ProductController extends Controller
             if ($product->weight_g == 0) {
                 $product->weight_g = 100;
             }
-            if ($product->name != 'Name Not Found') {
-                $product->save();
-                $user->scanned()->attach($product);
+            if ($product->name == 'Name Not Found') {
+                return response()->json(['message' => 'No Information Found'], 203);
             }
+            $product->save();
+            $user->scanned()->attach($product);
         }
         return response()->json(new ProductResource($product), 200);
     }
