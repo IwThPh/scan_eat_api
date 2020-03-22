@@ -31,7 +31,9 @@ class OpenFoodFactsProduct
      */
     public function getProduct($barcode)
     {
-        $raw = $this->endpointRequest('product/' . $barcode . '.json');
+        $raw = $this->getRawProduct($barcode);
+
+        $nutrient_per = Arr::get($raw, 'product.nutrient_data_per');
         $product = [
             'barcode' => Arr::get($raw, 'code', 0),
             'name' => Arr::get($raw, 'product.product_name', 'Name Not Found'),
@@ -50,8 +52,9 @@ class OpenFoodFactsProduct
         $unit = Arr::get($raw, 'product.nutriments.energy_unit', 'kcal');
         $kcalToKJ = 4.184;
 
-
-        if ($unit == 'kJ') {
+        if ($unit == 'kcal') {
+            $product['energy_100g'] = $product['energy_100g'];
+        } else {
             $product['energy_100g'] = $product['energy_100g'] / $kcalToKJ;
         }
 
