@@ -2,8 +2,11 @@
 
 namespace App\Util;
 
+use App\Allergen;
+use App\Product;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class OpenFoodFactsProduct
 {
@@ -35,6 +38,7 @@ class OpenFoodFactsProduct
 
         $nutrient_per = Arr::get($raw, 'product.nutrient_data_per');
         $product = [
+            'status' => Arr::get($raw, 'status', 0),
             'barcode' => Arr::get($raw, 'code', 0),
             'name' => Arr::get($raw, 'product.product_name', 'Name Not Found'),
             'weight_g' => Arr::get($raw, 'product.product_quantity', 100),
@@ -49,15 +53,45 @@ class OpenFoodFactsProduct
             'saturated_100g' => Arr::get($raw, 'product.nutriments.saturated-fat_100g', 0),
             'sodium_100g' => Arr::get($raw, 'product.nutriments.sodium_100g', 0),
         ];
-        $unit = Arr::get($raw, 'product.nutriments.energy_unit', 'kcal');
-        $kcalToKJ = 4.184;
 
-        if ($unit == 'kcal') {
-            $product['energy_100g'] = $product['energy_100g'];
+        if ($product['status'] == 1) {
+            if (Arr::get($raw, 'product.nutriments.energy_unit', 'kcal') == 'kcal') {
+                $product['energy_100g'] = $product['energy_100g'];
+            } else {
+                $product['energy_100g'] = $product['energy_100g'] / 4.184;
+            }
+            $product = new Product($product);
+            $product->save();
+
+            //TODO: Reserach into foreign locale data.
+            // $lc = Arr::get($raw, 'product.lc', 'en') . ':';
+            $lc = 'en:';
+            $traceCollection = collect(Arr::get($raw, 'product.traces_hierarchy', []))->map(function ($item) use ($lc) {
+                return Str::lower(Str::after($item, $lc));
+            });
+            $allergenCollection = collect(Arr::get($raw, 'product.allergens_heirarchy', []))->map(function ($item) use ($lc) {
+                return Str::lower(Str::after($item, $lc));
+            });
+            $analysisCollection = collect(Arr::get($raw, 'product.ingredients_analysis_tags', []))->map(function ($item) use ($lc) {
+                return Str::lower(Str::after($item, $lc));
+            });
+
+            foreach (Allergen::all() as $a) {
+                $n = Str::lower($a->name);
+                if ($traceCollection->contains($n) || $allergenCollection->contains($n)) {
+                    $product->allergens()->attach($a);
+                }
+            }
+            //TODO: Needs further investigation.
+            // foreach (Diets::all() as $d) {
+            //     $n = Str::lower($d->name);
+            //     if ($analysisCollection->contains($n)) {
+            //         $product->diets()->attach($d);
+            //     }
+            // }
         } else {
-            $product['energy_100g'] = $product['energy_100g'] / $kcalToKJ;
+            $product = null;
         }
-
         return $product;
     }
 

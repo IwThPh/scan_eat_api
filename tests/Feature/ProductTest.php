@@ -18,6 +18,8 @@ class ProductTest extends TestCase
         parent::setUp();
 
         $this->artisan('passport:install');
+        $this->artisan('db:seed --class=AllergensTableSeeder');
+        $this->artisan('db:seed --class=DietsTableSeeder');
         $user = factory(User::class)->create();
         Passport::actingAs($user);
     }
@@ -35,6 +37,7 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
 
         $json = [
+            'allergens' => [], 'diets' => [],
             'id' => $product->id, 'barcode' => $product->barcode, 'name' => $product->name,
             'weight_g' => $product->weight_g, 'serving_g' => $product->serving_g, 'energy_100g' => $product->energy_100g,
             'carbohydrate_100g' => $product->carbohydrate_100g, 'protein_100g' => $product->protein_100g,
