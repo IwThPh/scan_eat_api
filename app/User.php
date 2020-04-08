@@ -51,8 +51,8 @@ class User extends Authenticatable
     public function scanned()
     {
         return $this->belongsToMany('App\Product', 'product_user',
-                                    'user_id', 'product_id')
-                    ->withPivot('saved')->withTimestamps();
+            'user_id', 'product_id')
+            ->withPivot('saved')->withTimestamps();
     }
 
     /**
@@ -60,9 +60,8 @@ class User extends Authenticatable
      */
     public function favourites()
     {
-        return $this->belongsToMany('App\Product', 'product_user',
-                                    'user_id', 'product_id')
-                    ->wherePivot('saved', true);
+        return $this->scanned()
+            ->wherePivot('saved', true);
     }
 
     /**
@@ -71,7 +70,7 @@ class User extends Authenticatable
     public function allergens()
     {
         return $this->belongsToMany('App\Allergen', 'allergen_user',
-                                    'user_id', 'allergen_id');
+            'user_id', 'allergen_id');
     }
 
     /**
@@ -80,7 +79,7 @@ class User extends Authenticatable
     public function diets()
     {
         return $this->belongsToMany('App\Diet', 'diet_user',
-                                    'user_id', 'diet_id');
+            'user_id', 'diet_id');
     }
 
 }

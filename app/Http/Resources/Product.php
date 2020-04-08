@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Product extends JsonResource
@@ -33,6 +34,9 @@ class Product extends JsonResource
             'updated_at' => $this->updated_at,
             'allergens' => $this->getAllergensIdAttribute(),
             'diets' => $this->getDietsIdAttribute(),
+            'saved' => $this->whenPivotLoaded('scanned', 'product_user', function () {
+                return Auth::user()->favourites->contains($this->id);
+            })
         ];
     }
 }

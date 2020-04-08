@@ -16,6 +16,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('auth/refresh', 'AuthController@refresh');
 
     Route::get('product/{barcode}', 'ProductController@show')->where('barcode', '[0-9]+');
+    Route::patch('product/{barcode}', 'ProductController@save')->where('barcode', '[0-9]+');
+    Route::delete('product/{barcode}', 'ProductController@unsave')->where('barcode', '[0-9]+');
 
     Route::patch('allergens', 'AllergenController@select');
     Route::patch('diets', 'DietController@select');

@@ -20,8 +20,8 @@ class ProductTest extends TestCase
         $this->artisan('passport:install');
         $this->artisan('db:seed --class=AllergensTableSeeder');
         $this->artisan('db:seed --class=DietsTableSeeder');
-        $user = factory(User::class)->create();
-        Passport::actingAs($user);
+        $this->user = factory(User::class)->create();
+        Passport::actingAs($this->user);
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
 
         $json = [
-            'allergens' => [], 'diets' => [],
+            'allergens' => [], 'diets' => [], 'saved' => false,
             'id' => $product->id, 'barcode' => $product->barcode, 'name' => $product->name,
             'weight_g' => $product->weight_g, 'serving_g' => $product->serving_g, 'energy_100g' => $product->energy_100g,
             'carbohydrate_100g' => $product->carbohydrate_100g, 'protein_100g' => $product->protein_100g,
@@ -121,5 +121,52 @@ class ProductTest extends TestCase
         $this->assertDatabaseMissing('products', [
             'barcode' => $barcode,
         ]);
+    }
+
+    /**
+     * @test
+     * A product can be saved.
+     *
+     * @return void
+     */
+    public function a_product_can_be_saved()
+    {
+        // $this->withoutExceptionHandling();
+        $this->refreshDatabase();
+
+        $product = factory(Product::class)->create();
+        $barcode = $product->barcode;
+
+        $this->get('api' . '/product/' . $barcode);
+        $response = $this->patch('api' . '/product/' . $barcode);
+
+        $response->assertStatus(200);
+        $this->assertEquals(true, $this->user->scanned->contains(1));
+        //This is needed as favourites is not actually a belongs to many function
+        $this->assertEquals(true, $this->user->favourites()->get()->contains(1));
+    }
+
+    /**
+     * @test
+     * A product can be unsaved.
+     *
+     * @return void
+     */
+    public function a_product_can_be_unsaved()
+    {
+        // $this->withoutExceptionHandling();
+        $this->refreshDatabase();
+
+        $product = factory(Product::class)->create();
+        $barcode = $product->barcode;
+
+        $this->get('api' . '/product/' . $barcode);
+        $response = $this->patch('api' . '/product/' . $barcode);
+        $response = $this->delete('api' . '/product/' . $barcode);
+
+        $response->assertStatus(200);
+        $this->assertEquals(true, $this->user->scanned->contains(1));
+        //This is needed as favourites is not actually a belongs to many function
+        $this->assertEquals(false, $this->user->favourites()->get()->contains(1));
     }
 }
