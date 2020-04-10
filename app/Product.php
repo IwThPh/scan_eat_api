@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -24,7 +25,7 @@ class Product extends Model
      * @var array
      */
     protected $appends = [
-        'allergens_id', 'diets_id',
+        'allergens_id', 'diets_id', 'saved',
     ];
 
     /**
@@ -102,5 +103,10 @@ class Product extends Model
     public function getDietsIdAttribute()
     {
         return $this->diets->pluck('id');
+    }
+
+    public function getSavedAttribute()
+    {
+        return Auth::user()->favourites->contains($this->id);
     }
 }
