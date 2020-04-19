@@ -32,8 +32,8 @@ class Product extends JsonResource
             'sodium_100g' => $this->sodium_100g,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'allergens' => $this->getAllergensIdAttribute(),
-            'diets' => $this->getDietsIdAttribute(),
+            'allergens_id' => $this->getAllergensIdAttribute(),
+            'diets_id' => $this->getDietsIdAttribute(),
             'saved' => Auth::user()->favourites->contains($this->id),
         ];
     }
