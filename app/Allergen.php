@@ -15,7 +15,6 @@ class Allergen extends Model
         'name', 'description'
     ];
 
-    //TODO: Check if the inverse of a many-to-many relationship needs to be defined.
     /**
      * The users that have selected this allergen.
      */

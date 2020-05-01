@@ -17,7 +17,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return the specified Product.
+     *
+     * User found from parsed Bearer Token.
+     * Product added to user's history.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +39,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Save the specified resource.
+     * Save the specified Product to User's saved list.
+     *
+     * User found from parsed Bearer Token.
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +57,9 @@ class ProductController extends Controller
     }
 
     /**
-     * un-save the specified resource.
+     * Un-Save the specified Product to User's saved list.
+     *
+     * User found from parsed Bearer Token.
      *
      * @return \Illuminate\Http\Response
      */

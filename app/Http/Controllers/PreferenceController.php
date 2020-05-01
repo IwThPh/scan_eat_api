@@ -29,6 +29,8 @@ class PreferenceController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * User found from parsed Bearer Token
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -94,6 +96,8 @@ class PreferenceController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * User found from parsed Bearer Token
      *
      * @param  \App\preference  $preference
      * @return \Illuminate\Http\Response

@@ -22,6 +22,8 @@ class DietController extends Controller
     /**
      * Selects given diets for a user.
      *
+     * User found from parsed Bearer Token
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -39,61 +41,5 @@ class DietController extends Controller
         }
 
         return response()->json(['message' => 'Diets selected!'], 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\diet  $diet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(diet $diet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\diet  $diet
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(diet $diet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\diet  $diet
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, diet $diet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\diet  $diet
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(diet $diet)
-    {
-        //
     }
 }

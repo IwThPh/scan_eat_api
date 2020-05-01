@@ -35,7 +35,7 @@ class AuthController extends AccessTokenController
     }
 
     /**
-     * Registers a user and returns an access token.
+     * Registers a user and returns an access token and a refresh token.
      */
     public function register(Request $request)
     {
@@ -72,7 +72,7 @@ class AuthController extends AccessTokenController
     }
 
     /**
-     * revokes the provided bearer token.
+     * Revokes the all Bearer tokens provided to the given User.
      */
     public function revoke(Request $request)
     {

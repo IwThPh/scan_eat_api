@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 class OpenFoodFactsProvider extends ServiceProvider
 {
     /**
-     * Register services.
+     * Register OpenFoodFacts API service.
      *
      * @return void
      */

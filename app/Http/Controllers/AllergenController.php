@@ -22,6 +22,8 @@ class AllergenController extends Controller
     /**
      * Selects given allergens for a user.
      *
+     * User found from parsed Bearer Token
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -39,61 +41,5 @@ class AllergenController extends Controller
         }
 
         return response()->json(['message' => 'Selected Allergens!'], 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\allergen  $allergen
-     * @return \Illuminate\Http\Response
-     */
-    public function show(allergen $allergen)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\allergen  $allergen
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(allergen $allergen)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\allergen  $allergen
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, allergen $allergen)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\allergen  $allergen
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(allergen $allergen)
-    {
-        //
     }
 }

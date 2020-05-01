@@ -14,7 +14,7 @@ class OpenFoodFactsProduct
     protected $client;
 
     /**
-     *
+     *  Constructs OpenFoodFacts API service.
      */
     public function __construct(Client $client)
     {

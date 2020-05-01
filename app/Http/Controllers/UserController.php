@@ -10,7 +10,9 @@ use App\Http\Resources\Products as ProductCollection;
 class UserController extends Controller
 {
     /**
-     * Display the specified resource.
+     * Return the specified User.
+     *
+     * User found from parsed Bearer Token.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -23,6 +25,8 @@ class UserController extends Controller
 
     /**
      * Retrieve a user's scan history.
+     *
+     * User found from parsed Bearer Token.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
@@ -37,6 +41,8 @@ class UserController extends Controller
 
     /**
      * Retrieve a user's saved scan products.
+     *
+     * User found from parsed Bearer Token.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
