@@ -9,5 +9,6 @@ $factory->define(diet::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'description' => $faker->sentence,
+        'alt' => [1 => 'alt'],
     ];
 });

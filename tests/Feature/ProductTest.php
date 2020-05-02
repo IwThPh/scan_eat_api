@@ -37,7 +37,7 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
 
         $json = [
-            'allergens' => [], 'diets' => [], 'saved' => false,
+            'allergens_id' => [], 'diets_id' => [], 'saved' => false,
             'id' => $product->id, 'barcode' => $product->barcode, 'name' => $product->name,
             'weight_g' => $product->weight_g, 'serving_g' => $product->serving_g, 'energy_100g' => $product->energy_100g,
             'carbohydrate_100g' => $product->carbohydrate_100g, 'protein_100g' => $product->protein_100g,

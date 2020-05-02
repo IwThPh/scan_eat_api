@@ -12,7 +12,16 @@ class Allergen extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'alt'
+    ];
+
+    /**
+     * The attributes to cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'alt' => 'array'
     ];
 
     /**

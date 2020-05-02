@@ -12,21 +12,22 @@ class DietsTableSeeder extends Seeder
      */
     public function run()
     {
-        //Create 10 Random Diets.
-        // factory(App\Diet::class, 10)->create();
-
         //Creates default diets
         //TODO: Add appropriate descriptions.
-        $diets = [];
-        $diets = Arr::add($diets, "Vegatarian", "desc");
-        $diets = Arr::add($diets, "Vegan", "desc");
-        $diets = Arr::add($diets, "Kosher ", "desc");
-
-        foreach ($diets as $name => $desc) {
-            $diet = new Diet;
-            $diet -> name = $name;
-            $diet -> description = $desc;
-            $diet -> save();
-        }
+        $d = new Diet;
+        $d -> name = "Vegatarian";
+        $d -> description = "Description";
+        $d -> alt = [1 => 'vegatarian',];
+        $d->save();
+        $d = new Diet;
+        $d -> name = "Vegan";
+        $d -> description = "Description";
+        $d -> alt = [1 => 'vegan',];
+        $d->save();
+        $d = new Diet;
+        $d -> name = "Kosher";
+        $d -> description = "Description";
+        $d -> alt = [1 => 'kosher',];
+        $d->save();
     }
 }

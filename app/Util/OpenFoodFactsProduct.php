@@ -3,6 +3,7 @@
 namespace App\Util;
 
 use App\Allergen;
+use App\Diet;
 use App\Product;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
@@ -63,32 +64,34 @@ class OpenFoodFactsProduct
             $product = new Product($product);
             $product->save();
 
-            //TODO: Reserach into foreign locale data.
-            // $lc = Arr::get($raw, 'product.lc', 'en') . ':';
-            $lc = 'en:';
+            $lc = 'en:'; // Locale for OFF API.
+
+            //Allergen Collection
             $traceCollection = collect(Arr::get($raw, 'product.traces_hierarchy', []))->map(function ($item) use ($lc) {
                 return Str::lower(Str::after($item, $lc));
             });
             $allergenCollection = collect(Arr::get($raw, 'product.allergens_heirarchy', []))->map(function ($item) use ($lc) {
                 return Str::lower(Str::after($item, $lc));
             });
-            $analysisCollection = collect(Arr::get($raw, 'product.ingredients_analysis_tags', []))->map(function ($item) use ($lc) {
-                return Str::lower(Str::after($item, $lc));
-            });
-
             foreach (Allergen::all() as $a) {
-                $n = Str::lower($a->name);
-                if ($traceCollection->contains($n) || $allergenCollection->contains($n)) {
+                $alt = $a -> alt;
+                $traceInt = array_intersect($alt, $traceCollection->toArray());
+                $allergenInt = array_intersect($alt, $allergenCollection->toArray());
+                if (count($allergenInt) > 0 || count($traceInt) > 0) {
                     $product->allergens()->attach($a);
                 }
             }
-            //TODO: Needs further investigation.
-            // foreach (Diets::all() as $d) {
-            //     $n = Str::lower($d->name);
-            //     if ($analysisCollection->contains($n)) {
-            //         $product->diets()->attach($d);
-            //     }
-            // }
+
+            //Diet Collection
+            $analysisCollection = collect(Arr::get($raw, 'product.ingredients_analysis_tags', []))->map(function ($item) use ($lc) {
+                return Str::lower(Str::after($item, $lc));
+            });
+            foreach (Diets::all() as $d) {
+                $analysisInt = array_intersect($d->alt, $analysisCollection);
+                if (count($analysisInt) > 0) {
+                    $product->diets()->attach($d);
+                }
+            }
         } else {
             $product = null;
         }

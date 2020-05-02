@@ -12,32 +12,77 @@ class AllergensTableSeeder extends Seeder
      */
     public function run()
     {
-        //Create 10 Random Allergens.
-        // factory(App\Allergen::class, 10)->create();
-
         //Creates default allergens
         //TODO: Add appropriate descriptions.
-        $allergens = [];
-        $allergens = Arr::add($allergens, "Celery", "desc");
-        $allergens = Arr::add($allergens, "Gluten", "desc");
-        $allergens = Arr::add($allergens, "Crustaceans ", "desc");
-        $allergens = Arr::add($allergens, "Eggs", "desc");
-        $allergens = Arr::add($allergens, "Fish", "desc");
-        $allergens = Arr::add($allergens, "Lupin ", "desc");
-        $allergens = Arr::add($allergens, "Milk", "desc");
-        $allergens = Arr::add($allergens, "Molluscs", "desc");
-        $allergens = Arr::add($allergens, "Mustard", "desc");
-        $allergens = Arr::add($allergens, "Tree Nuts ", "desc");
-        $allergens = Arr::add($allergens, "Peanuts", "desc");
-        $allergens = Arr::add($allergens, "Sesame Seeds", "desc");
-        $allergens = Arr::add($allergens, "Soybeans", "desc");
-        $allergens = Arr::add($allergens, "Sulphites", "desc");
-
-        foreach ($allergens as $name => $desc) {
-            $allergen = new Allergen;
-            $allergen -> name = $name;
-            $allergen -> description = $desc;
-            $allergen -> save();
-        }
+        $a = new Allergen;
+        $a->name = "Celery";
+        $a->description = "Description";
+        $a->alt = [1 => 'celery'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Gluten";
+        $a->description = "Description";
+        $a->alt = [1 => 'gluten'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Crustaceans";
+        $a->description = "Description";
+        $a->alt = [1 => 'crustaceans'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Eggs";
+        $a->description = "Description";
+        $a->alt = [1 => 'eggs'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Fish";
+        $a->description = "Description";
+        $a->alt = [1 => 'fish'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Lupin";
+        $a->description = "Description";
+        $a->alt = [1 => 'lupin'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Milk";
+        $a->description = "Description";
+        $a->alt = [1 => 'milk'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Molluscs";
+        $a->description = "Description";
+        $a->alt = [1 => 'molluscs'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Mustard";
+        $a->description = "Description";
+        $a->alt = [1 => 'mustard'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Tree Nuts";
+        $a->description = "Description";
+        $a->alt = [1 => 'tree nuts'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Peanuts";
+        $a->description = "Description";
+        $a->alt = [1 => 'peanuts'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Sesame Seeds";
+        $a->description = "Description";
+        $a->alt = [1 => 'sesame seeds'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Soybeans";
+        $a->description = "Description";
+        $a->alt = [1 => 'soybeans'];
+        $a->save();
+        $a = new Allergen;
+        $a->name = "Sulphites";
+        $a->description = "Description";
+        $a->alt = [1 => 'sulphites'];
+        $a->save();
     }
 }
