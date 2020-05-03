@@ -22,7 +22,7 @@ class AllergensTableSeeder extends Seeder
         $a = new Allergen;
         $a->name = "Gluten";
         $a->description = "Description";
-        $a->alt = [1 => 'gluten'];
+        $a->alt = [1 => 'gluten', 2 => 'wheat-gluten'];
         $a->save();
         $a = new Allergen;
         $a->name = "Crustaceans";
@@ -47,7 +47,7 @@ class AllergensTableSeeder extends Seeder
         $a = new Allergen;
         $a->name = "Milk";
         $a->description = "Description";
-        $a->alt = [1 => 'milk'];
+        $a->alt = [1 => 'milk', 2 => 'buttermilk', 3=>'milkfat'];
         $a->save();
         $a = new Allergen;
         $a->name = "Molluscs";
@@ -62,7 +62,7 @@ class AllergensTableSeeder extends Seeder
         $a = new Allergen;
         $a->name = "Tree Nuts";
         $a->description = "Description";
-        $a->alt = [1 => 'tree nuts'];
+        $a->alt = [1 => 'tree nuts', 2 => 'nuts'];
         $a->save();
         $a = new Allergen;
         $a->name = "Peanuts";
@@ -72,17 +72,17 @@ class AllergensTableSeeder extends Seeder
         $a = new Allergen;
         $a->name = "Sesame Seeds";
         $a->description = "Description";
-        $a->alt = [1 => 'sesame seeds'];
+        $a->alt = [1 => 'sesame seeds', 2 => 'sesame-seeds'];
         $a->save();
         $a = new Allergen;
         $a->name = "Soybeans";
         $a->description = "Description";
-        $a->alt = [1 => 'soybeans'];
+        $a->alt = [1 => 'soybeans', 2=>'soy-lecithin'];
         $a->save();
         $a = new Allergen;
         $a->name = "Sulphites";
         $a->description = "Description";
-        $a->alt = [1 => 'sulphites'];
+        $a->alt = [1 => 'sulphites', 2=> 'sulphur-dioxide-and-sulphites'];
         $a->save();
     }
 }
