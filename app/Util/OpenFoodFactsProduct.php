@@ -86,8 +86,9 @@ class OpenFoodFactsProduct
             $analysisCollection = collect(Arr::get($raw, 'product.ingredients_analysis_tags', []))->map(function ($item) use ($lc) {
                 return Str::lower(Str::after($item, $lc));
             });
-            foreach (Diets::all() as $d) {
-                $analysisInt = array_intersect($d->alt, $analysisCollection);
+            foreach (Diet::all() as $d) {
+                $alt = $d -> alt;
+                $analysisInt = array_intersect($alt, $analysisCollection->toArray());
                 if (count($analysisInt) > 0) {
                     $product->diets()->attach($d);
                 }
